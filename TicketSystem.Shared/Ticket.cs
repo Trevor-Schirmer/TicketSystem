@@ -8,8 +8,8 @@ namespace TicketSystem.Shared
 {
     public class Ticket
     {
-        [Key][Required]
-        public int TicketNo { get; set; }       
+        public int TicketNo { get; set; }
+        [Key]
 
         public DateTime DateCreated { get; set; }
 
@@ -28,6 +28,12 @@ namespace TicketSystem.Shared
         public string Priority { get; set; }
 
         public string Merged { get; set; }
+
+        public string Title { get; set; }
+
+        public string Department { get; set; }
+
+        public string Body { get; set; }
 
     }
 }

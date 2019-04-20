@@ -17,11 +17,13 @@ namespace TicketSystem.Server.DataAccess
         {
             if (!optionsBuilder.IsConfigured)
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = @"WIN10VMSQL\SQLEXPRESS";
-                builder.UserID = "sa";
-                builder.Password = "Lexington!";
-                builder.InitialCatalog = "TicketSystem";
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
+                {
+                    DataSource = @"WIN10VMSQL\SQLEXPRESS",
+                    UserID = "sa",
+                    Password = "Lexington!",
+                    InitialCatalog = "TicketSystem"
+                };
 
                 optionsBuilder.UseSqlServer(builder.ToString());
             }

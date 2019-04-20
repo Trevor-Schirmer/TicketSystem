@@ -1,4 +1,74 @@
 ﻿@page "/CreateTicket"
+@using TicketSystem.Shared
+@inject HttpClient Http
 
-<h1>Create Ticket</h1>
+<h1>Create</h1>
+<h3>Ticket</h3>
+<hr />
 
+
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="Title" class="control-label">Title</label>
+                <input for="Title" class="form-control" bind="@ticket.Title" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Body" class="control-label">Body</label>
+                <input asp-for="Body" class="form-control" bind="@ticket.Body" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label">Department</label>
+                <select asp-for="Department" class="form-control" bind="@ticket.Department">
+                    <option value="">-- Select Department --</option>
+                    <option value="Pricing">Pricing</option>
+                    <option value="Sales">Sales</option>
+                    <option value="RSG">RSG</option>
+                    <option value="CSG">CSG</option>
+                    <option value="Warehouse">Warehouse</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DueDate" class="control-label">Due Date</label>
+                <input type="date" asp-for="DueDate" class="form-control" bind="@ticket.DueDate" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Priority" class="control-label">Priority</label>
+                <select asp-for="Priority" class="form-control" bind="@ticket.Priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Urgent">Urgent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default" onclick="@(async () => await NewTicket())">Save</button>
+                <button class="btn" onclick="@cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+    Ticket: @ticket.TicketNo
+    Ticket: @ticket.Title
+</div>
+
+@functions {
+    //IUriHelper UriHelper = new IUriHelper();
+
+    Ticket ticket = new Ticket();
+    protected async Task NewTicket()
+    {
+        ticket.TicketNo = 1001;
+        System.Console.WriteLine("Hello");
+        System.Console.WriteLine(ticket.ToString());
+        await Http.SendJsonAsync(HttpMethod.Post, "api/Ticket/Create", ticket);
+        //UriHelper.NavigateTo("/fetchdata");
+    }
+
+    void cancel()
+    {
+        System.Console.WriteLine("Hello");
+
+        //UriHelper.NavigateTo("/fetchdata");
+    }
+}

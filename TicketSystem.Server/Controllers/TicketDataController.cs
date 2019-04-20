@@ -26,9 +26,37 @@ namespace TicketSystem.Server.Controllers
             return objTicket.GetAllTickets();
         }
 
+        [HttpPost]
+        [Route("api/Ticket/Create")]
+        public void Create(Ticket ticket)
+        {
+            System.Console.WriteLine("Hello");
 
+            objTicket.AddTicket(ticket);
+        }
 
+        [HttpGet]
+        [Route("api/Ticket/Details/{id}")]
+        public Ticket Details(int id)
+        {
 
+            return objTicket.GetTicketData(id);
+        }
+
+        [HttpPut]
+        [Route("api/Ticket/Edit")]
+        public void Edit([FromBody]Ticket ticket)
+        {
+            if (ModelState.IsValid)
+                objTicket.UpdateTicket(ticket);
+        }
+
+        [HttpDelete]
+        [Route("api/Ticket/Delete/{id}")]
+        public void Delete(int id)
+        {
+            objTicket.DeleteTicket(id);
+        }
 
 
 
@@ -84,10 +112,10 @@ namespace TicketSystem.Server.Controllers
 
         //        return tickets;
 
-    //}
+        //}
 
 
 
 
-}
+    }
 }
